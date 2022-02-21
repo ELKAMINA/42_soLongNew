@@ -2,21 +2,18 @@ CC = gcc -Wall -Werror -Wextra -g
 
 NAME = so_long
 
-LIB = ./librairies/minilibx/libmlx.a
-
-SRC =  \
+SRC =  main.c\
 
 OBJ = $(SRC:.c=.o)
 
 all : $(NAME)
 
-MLX = ./librairies/minilibx/libmlx.a
-
 %.o : %.c
-	$(CC) -c $< -o $@
+	$(CC) -Imlx -c $< -o $@
 
 $(NAME) : $(OBJ)
-	$(CC) -o $(NAME) $(OBJ) $(LIB)
+	make -C mlx
+	$(CC) $(OBJ) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 clean :
 	rm -rf $(OBJ)
