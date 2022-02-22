@@ -1,4 +1,4 @@
-#include "../ext_func/so_long.h"
+#include "../so_long.h"
 
 int	ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
@@ -10,11 +10,11 @@ int	ft_strnstr(const char *haystack, const char *needle, size_t len)
 	j = 0;
 	hays = (char *)haystack;
 	if (needle[0] == '\0' || needle == NULL)
-		return (hays);
+		return (3);
 	while (hays[i] != '\0' && i < len)
 	{
 		j = 0;
-		while (hays[i] == needle[j] && hays != '\0'
+		while (hays[i] == needle[j] && hays != (void *)0
 			&& needle[j] != '\0' && i < len)
 		{
 			i ++;
