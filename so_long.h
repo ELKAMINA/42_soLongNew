@@ -8,10 +8,24 @@
 # include <stdlib.h>
 # include "./gnl/get_next_line.h"
 
+//Main struct
+
+typedef struct s_soLong
+{
+    char    **scene;
+    char    P;
+    char    W;
+    char    V;
+    char    E;
+    char    C;
+
+
+}   t_soLong;
+
 // Check params and get map
-void        check_nb_args(int argc, char *argv[]);
-void        check_name_arg(char *argv[]);
-void        check_file(char *argv);
+int        check_create(int argc, char *argv[]);
+int        check_name_arg(char *argv[]);
+int         check_file(char *argv);
 char	    **get_stage(int fd);
 
 

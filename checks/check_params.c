@@ -1,17 +1,17 @@
 #include "../so_long.h"
 
-void	check_nb_args(int argc, char *argv[])
+int	check_create(int argc, char *argv[])
 {
 	if (argc != 2)
 	{
 		write(1, "Error in args \n", 15);
-		return ;
+		return (0);
 	}
 	else
-		check_name_arg(argv);
+		return (check_name_arg(argv));
 	}
 
-	void	check_name_arg(char *argv[])
+	int	check_name_arg(char *argv[])
 	{
 	size_t	len;
 
@@ -21,8 +21,8 @@ void	check_nb_args(int argc, char *argv[])
 			argv[1][ft_strrchr(argv[1], '.') - 1] == '/')
 	{
 		write(1, "Error in args \n", 15);
-		return ;
+		return (0);
 	}
 	else
-		check_file(argv[1]);
+		return (check_file(argv[1]));
 }

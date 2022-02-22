@@ -4,5 +4,16 @@
 
 int	main(int argc, char *argv[])
 {
-	check_nb_args(argc, argv);
+	int 	fd;
+	t_soLong game;
+
+	fd = check_create(argc, argv);
+	//malloc la struct; 
+	if (fd == 0)
+		return (0);
+	else
+		game.scene = get_stage(fd);
+	verif_scene(game);
+	
+	
 }

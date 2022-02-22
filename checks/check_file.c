@@ -1,6 +1,6 @@
 #include "../so_long.h"
 
-void	check_file(char *argv)
+int	check_file(char *argv)
 {
 	int				fd;
 	
@@ -8,10 +8,10 @@ void	check_file(char *argv)
 	if (fd == -1)
 	{
 		write(1, "Error - Directory not File\n", 28);
-		return ;
+		return (0);
 	}
 	else
-		get_stage(fd);
+		return (fd);
 }
 
 char	**get_stage(int fd)
@@ -30,10 +30,5 @@ char	**get_stage(int fd)
 		buf = get_next_line(fd);
 	}
 	map = ft_split(final, '\n');
-	while (map[i])
-	{
-		printf("%s\n", map[i]);
-		i++;
-	}
 	return (map);
 }
