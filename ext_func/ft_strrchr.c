@@ -12,7 +12,7 @@ int	ft_strrchr(const char *s, int c)
 	character = (unsigned char)c;
 	i = 0;
 	j = -1;
-	while (i <= ft_strlen(s))
+	while (i <= ft_strlen((char *)s))
 	{
 		if (sent[i] != character)
 			i++;

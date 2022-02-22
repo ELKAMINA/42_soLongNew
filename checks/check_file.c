@@ -1,24 +1,39 @@
 #include "../so_long.h"
 
-void check_file(char *argv)
+void	check_file(char *argv)
 {
-    int fd;
-    int v_ret;
-    char *buf;
-    int   i;
+	int				fd;
+	
+	fd = open(argv, O_RDWR);
+	if (fd == -1)
+	{
+		write(1, "Error - Directory not File\n", 28);
+		return ;
+	}
+	else
+		get_stage(fd);
+}
 
-    fd = open(&argv[1], O_RDWR);
-    if (fd == -1)
-    {
-        write(1, "Error - Directory not File\n", 28);
-        return ;
-    }
-    v_ret = 1;
-    buf = malloc((sizeof(char) * 1) + 1);
-    i = 0;
-    while(v_ret != 0)
-    {
-        v_ret = read(fd, buf, 1);
+char	**get_stage(int fd)
+{
+	char			*buf;
+	char			**map;
+	static	char	*final;
+	int		i;
 
-    }
+	i = 0;
+	buf = get_next_line(fd);
+	while (buf)
+	{
+		final = ft_strjoin(final, buf);
+		free(buf);
+		buf = get_next_line(fd);
+	}
+	map = ft_split(final, '\n');
+	while (map[i])
+	{
+		printf("%s\n", map[i]);
+		i++;
+	}
+	return (map);
 }
