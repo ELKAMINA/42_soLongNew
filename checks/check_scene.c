@@ -1,11 +1,5 @@
 #include "../so_long.h"
 
-void    verif_scene(t_soLong *game)
-{
-    count_initials(game);
-    return ;
-}
-
 void    count_initials(t_soLong *game)
 {
   int   i;
@@ -47,6 +41,7 @@ void check_validity(t_soLong *game)
     {
         write(1, "Error\n", 7);
         write(1, "At least 1 item, 1 collectible, 1 exit\n", 40);
+        freeing(game->scene);
         exit(0);
         return ;
     }

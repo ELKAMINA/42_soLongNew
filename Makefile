@@ -10,6 +10,7 @@ SRC =  main.c\
 		./checks/check_params.c \
 		./checks/check_scene.c \
 		./checks/check_scene2.c \
+		./freeing/to_free.c \
 		./gnl/get_next_line.c \
 		./gnl/get_next_line_utils.c \
 

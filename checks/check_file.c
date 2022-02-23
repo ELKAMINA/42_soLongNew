@@ -7,6 +7,7 @@ int	check_file(char *argv)
 	fd = open(argv, O_RDWR);
 	if (fd == -1)
 	{
+		write(1, "Error\n", 7);
 		write(1, "Error - Directory not File\n", 28);
 		return (0);
 	}
@@ -28,15 +29,9 @@ char	**get_stage(int fd)
 		buf = get_next_line(fd);
 	}
 	map = ft_split(final, '\n');
+	free(final);
+	close(fd);
 	return (map);
 }
 
-void	init_struct(t_soLong *game, int fd)
-{
-	game->scene = get_stage(fd);
-	game->p = 0;
-	game->w = 0;
-	game->v = 0;
-	game->e = 0;
-	game->c = 0;
-}
+

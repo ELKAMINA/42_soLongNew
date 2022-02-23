@@ -16,6 +16,7 @@ int   check_square(t_soLong *game)
             {
                 write (1, "Error\n", 7);
                 write (1, "It's not a rectangle\n", 22);
+                free(game->scene);
                 exit(0);
                 return (0);
             }
@@ -36,19 +37,19 @@ void    check_fence(t_soLong *game)
     j = 1;
     nb_lines = check_square(game);
     //printf("%d -- %s\n", nb_lines, game->scene[1]);
-    check_first_last_line(game->scene[0]);
+    check_first_last_line(game, game->scene[0]);
     while (i != nb_lines - 1 && j != nb_lines - 1)
     {
      
-        check_intermediate_lines(game->scene[j]);
+        check_intermediate_lines(game, game->scene[j]);
         i++;
         j++;
     }
-    check_first_last_line(game->scene[nb_lines - 1]);
+    check_first_last_line(game, game->scene[nb_lines - 1]);
     return ;
 }
 
-void check_first_last_line(char *lineOne)
+void check_first_last_line(t_soLong *game, char *lineOne)
 {
     int i;
 
@@ -59,6 +60,7 @@ void check_first_last_line(char *lineOne)
         {
             write (1, "Error\n", 7);
             write (1, "First or Last Line is not a wall\n", 34);
+            free(game->scene);
             exit(0);
             return ;
         }
@@ -66,13 +68,15 @@ void check_first_last_line(char *lineOne)
     }
 }
 
-void check_intermediate_lines(char *lineOne)
+void check_intermediate_lines(t_soLong *game, char *lineOne)
 {
     //printf("%c\n", lineOne[ft_strlen(lineOne) - 1]);
     if (lineOne[0] != '1' || lineOne[ft_strlen(lineOne) - 1] != '1')
     {
             write (1, "Error\n", 7);
             write (1, "There is no Wall\n", 18);
+            free(game->scene);
+            exit(0);
             return ;
     }   
 }

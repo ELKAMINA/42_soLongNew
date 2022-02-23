@@ -35,8 +35,11 @@ void    check_validity(t_soLong *game);
 void    check_walls(t_soLong *game);
 int     check_square(t_soLong *game);
 void    check_fence(t_soLong *game);
-void    check_first_last_line(char *lineOne);
-void    check_intermediate_lines(char *lineOne);
+void    check_first_last_line(t_soLong *game, char *lineOne);
+void    check_intermediate_lines(t_soLong *game, char *lineOne);
+
+// Free when parsing 
+void    freeing(char    **game);
 
 // External functions
 int	        ft_strrchr(const char *s, int c);

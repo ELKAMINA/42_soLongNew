@@ -4,7 +4,8 @@ int	check_create(int argc, char *argv[])
 {
 	if (argc != 2)
 	{
-		write(1, "Error in args \n", 15);
+		write(1, "Error\n", 7);
+		write(1, "Error in ARGS\n", 15);
 		return (0);
 	}
 	else
