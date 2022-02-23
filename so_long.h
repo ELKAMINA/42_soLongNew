@@ -13,21 +13,30 @@
 typedef struct s_soLong
 {
     char    **scene;
-    char    P;
-    char    W;
-    char    V;
-    char    E;
-    char    C;
-
-
+    int    p;
+    int    w;
+    int    v;
+    int    e;
+    int    c;
 }   t_soLong;
 
 // Check params and get map
 int        check_create(int argc, char *argv[]);
 int        check_name_arg(char *argv[]);
-int         check_file(char *argv);
-char	    **get_stage(int fd);
+int        check_file(char *argv);
+char	   **get_stage(int fd);
+void	    init_struct(t_soLong *game, int fd);
 
+// Check map validity
+void    verif_scene(t_soLong *game);
+void    count_initials(t_soLong *game);
+void    increment(t_soLong *game, char c);
+void    check_validity(t_soLong *game);
+void    check_walls(t_soLong *game);
+int     check_square(t_soLong *game);
+void    check_fence(t_soLong *game);
+void    check_first_last_line(char *lineOne);
+void    check_intermediate_lines(char *lineOne);
 
 // External functions
 int	        ft_strrchr(const char *s, int c);

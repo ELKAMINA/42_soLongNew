@@ -1,24 +1,25 @@
 #include "../so_long.h"
 
-void    verif_scene(char    **scene)
+void    verif_scene(t_soLong *game)
 {
-    count_init(char **scene);
-    return (0);
+    count_initials(game);
+    return ;
 }
 
-void    count_initials(char **game)
+void    count_initials(t_soLong *game)
 {
   int   i;
   int   j;
 
   i = 0;
-  while (game.scene[i])
+  while (game->scene[i])
   {
-      j = 0
-      while (game.scene[i][j])
+      j = 0;
+      while (game->scene[i][j])
       {
-          increment(game, game.scene[i][j]);
-          j++
+          increment(game, game->scene[i][j]);
+          //printf("P = %d --  V= %d -- W = %d -- C = %d -- E= %d\n", game->p, game->v, game->w, game->c, game->e);
+          j++;
       }
       i++;
   }
@@ -26,32 +27,33 @@ void    count_initials(char **game)
     check_walls(game);
 }
 
-void increment(t_soLong game, char c)
+void increment(t_soLong *game, char c)
 {
-    if (c == "P")
-        game.P++;
-    if (c == "0")
-        game.V++;
-    if (c == "1")
-        game.W++;
-    if (c == "C")
-        game.C++;
-    if (c == "E")
-        game.E++;
+    if (c == 'P')
+        game->p += 1;
+    if (c == '0')
+        game->v += 1;
+    if (c == '1')
+        game->w += 1;
+    if (c == 'C')
+        game->c += 1;
+    if (c == 'E')
+        game->e += 1;
 }
 
-void check_validity(t_soLong game)
+void check_validity(t_soLong *game)
 {
-    if (game.E < 1 || game.C < 1 || game.P < 1)
+    if (game->e < 1 || game->c < 1 || game->p < 1)
     {
         write(1, "Error\n", 7);
-        write(1, "At least 1 item, 1 collectible, 1 exit\n", 18); 
+        write(1, "At least 1 item, 1 collectible, 1 exit\n", 40);
+        exit(0);
         return ;
     }
     
 }
 
-void    check_walls(t_soLong game)
+void    check_walls(t_soLong *game)
 {
     check_square(game);
     check_fence(game);

@@ -19,9 +19,7 @@ char	**get_stage(int fd)
 	char			*buf;
 	char			**map;
 	static	char	*final;
-	int		i;
 
-	i = 0;
 	buf = get_next_line(fd);
 	while (buf)
 	{
@@ -31,4 +29,14 @@ char	**get_stage(int fd)
 	}
 	map = ft_split(final, '\n');
 	return (map);
+}
+
+void	init_struct(t_soLong *game, int fd)
+{
+	game->scene = get_stage(fd);
+	game->p = 0;
+	game->w = 0;
+	game->v = 0;
+	game->e = 0;
+	game->c = 0;
 }

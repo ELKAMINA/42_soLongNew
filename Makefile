@@ -8,6 +8,8 @@ SRC =  main.c\
 		./ext_func/ft_split.c \
 		./checks/check_file.c \
 		./checks/check_params.c \
+		./checks/check_scene.c \
+		./checks/check_scene2.c \
 		./gnl/get_next_line.c \
 		./gnl/get_next_line_utils.c \
 
