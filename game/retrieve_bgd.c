@@ -3,7 +3,7 @@
 void    get_background(t_frame *frame, t_soLong *game)
 {
     get_mlx_win(frame, game);
-    get_image(frame);
+    get_image(frame, game);
 }
 
 void    get_mlx_win(t_frame *frame, t_soLong *game)
@@ -25,18 +25,13 @@ void get_width_height(t_frame *myframe, t_soLong *game)
     //printf("height = %d --- width = %d\n", hei_g, wi_g);
 }
 
-void    get_image(t_frame *frame)
+void    get_image(t_frame *frame, t_soLong *game)
 {
-// MALLOC STRUCT ???????
-    t_img_data img;
+// MALLOC STRUCT ???????   
+    //my_mlx_put_pixel(&img, 5, 5, 0x00FF0000);
+    //printf("Test");
+    get_colored_square(frame, game);
 
-    init_struct_imgData(&img);
-    img.img = mlx_new_image(frame->mlx, frame->win_w, frame->win_h);
-    img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-    my_mlx_put_pixel(&img, 5, 5, 0x00FF0000);
-    square(&img);
-    mlx_put_image_to_window(frame->mlx, frame->win, img.img, 0, 0);
-    mlx_loop(frame->mlx);
 }
 
 // MALLOC STRUCT ???????

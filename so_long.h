@@ -68,9 +68,10 @@ void    get_width_height(t_frame *my_frame, t_soLong *game);
 void    get_background(t_frame *my_frame, t_soLong *game);
 void    get_mlx_win(t_frame *frame, t_soLong *game);
 void    my_mlx_put_pixel(t_img_data *img, int x, int y, int color);
-void    get_image(t_frame *frame);
+void    get_image(t_frame *frame, t_soLong *game);
 void    square (t_img_data *img);
 void    init_struct_imgData(t_img_data *img);
+void    get_colored_square(t_frame *frame, t_soLong *game);
 
 // External functions
 int	        ft_strrchr(const char *s, int c);
