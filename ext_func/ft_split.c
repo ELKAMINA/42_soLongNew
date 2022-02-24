@@ -1,82 +1,93 @@
 #include "../so_long.h"
-static int		count_words(char const *s, char c)
-{
-	int		i;
-	int		words;
 
-	words = 0;
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
-			words++;
-		i++;
-	}
-	return (words);
-}
-
-static int		words_len(char const *s, char c)
-{
-	int		i;
-	int		len;
-
-	i = 0;
-	len = 0;
-	while (s[i] != c && s[i] != '\0')
-	{
-		i++;
-		len++;
-	}
-	return (len);
-}
-
-static void		*leak(char **splitted, int words)
+static int	count_words(char const *s, char c)
 {
 	int	i;
+	int	j;
 
+	j = 1;
 	i = 0;
-	while (i < words)
+	if (!s)
+		return (0);
+	if (s[0] == c)
+		j = 0;
+	while (s[i] && c != '\0')
 	{
-		free(splitted[i]);
+		if (s[i] == c)
+		{
+			j ++;
+			while (s[i] == c)
+				i++;
+			if (!s[i])
+				return (j - 1);
+		}
 		i++;
 	}
-	free(splitted);
+	return (j);
+}
+
+static int	is_mychar(char c, char s)
+{
+	if (c == s)
+		return (1);
+	else
+		return (0);
+}
+
+static char	*to_malloc(char const *str, char c)
+{
+	char	*word;
+	int		i;
+
+	i = 0;
+	while (str[i] && !is_mychar(str[i], c))
+		i ++;
+	word = (char *)malloc((i + 1) * sizeof(char));
+	if (word == NULL)
+		return (NULL);
+	i = 0;
+	while (str[i] && !is_mychar(str[i], c))
+	{
+		word[i] = str[i];
+		i ++;
+	}
+	word[i] = '\0';
+	return (word);
+}
+
+static char	**ft_malloc_error(char **tab, int j)
+{
+	while (j--)
+		free(tab[j]);
+	free(tab[j]);
 	return (NULL);
 }
 
-static char		**fill(char const *s, int words, char c, char **splitted)
+char	**ft_split(char const *s, char c)
 {
-	int		i;
+	char	**tab;
 	int		j;
-	int		len;
+	int		i;
 
-	i = -1;
-	while (++i < words)
+	i = 0;
+	j = 0;
+	tab = malloc((count_words(s, c) + 1) * sizeof(char *));
+	if (tab == NULL)
+		return (NULL);
+	while (s && s[i])
 	{
-		while (*s == c)
-			s++;
-		len = words_len(s, c);
-		if (!(splitted[i] = (char *)malloc(sizeof(char) * (len + 1))))
-			return (leak(splitted, i));
-		j = 0;
-		while (j < len)
-			splitted[i][j++] = *s++;
-		splitted[i][j] = '\0';
+		while (s[i] && is_mychar(s[i], c))
+			i++;
+		if (s[i] && !is_mychar(s[i], c))
+		{
+			tab[j] = to_malloc((s + i), c);
+			if (tab[j] == NULL)
+				return (ft_malloc_error(&tab[j], count_words(s, c)));
+			j++;
+		}
+		while (s[i] && !(is_mychar(s[i], c)))
+			i++;
 	}
-	splitted[i] = NULL;
-	return (splitted);
-}
-
-char			**ft_split(char	const *s, char c)
-{
-	char	**splitted;
-	int		words;
-
-	if (!s)
-		return (NULL);
-	words = count_words(s, c);
-	if (!(splitted = (char **)malloc(sizeof(char *) * (words + 1))))
-		return (NULL);
-	splitted = fill(s, words, c, splitted);
-	return (splitted);
+	tab[j] = NULL;
+	return (tab);
 }

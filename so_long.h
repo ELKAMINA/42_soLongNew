@@ -7,6 +7,7 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include "./gnl/get_next_line.h"
+# include "minilibx/include/mlx.h"
 
 //Main struct
 
@@ -20,12 +21,32 @@ typedef struct s_soLong
     int    c;
 }   t_soLong;
 
+typedef struct s_frame
+{
+    void *mlx;
+    void *win;
+    int   win_w;
+    int   win_h;
+}   t_frame;
+
+typedef struct s_img_data
+{
+    void *img;
+    int	  bits_per_pixel;
+	int	  line_length;
+	int	  endian;
+    char  *rpath;
+	int	  img_width;
+	int	  img_height;
+    char  *addr;
+}   t_img_data;
+
 // Check params and get map
 int        check_create(int argc, char *argv[]);
 int        check_name_arg(char *argv[]);
 int        check_file(char *argv);
 char	   **get_stage(int fd);
-void	    init_struct(t_soLong *game, int fd);
+void	    init_struct_game(t_soLong *game, int fd);
 
 // Check map validity
 void    verif_scene(t_soLong *game);
@@ -40,6 +61,16 @@ void    check_intermediate_lines(t_soLong *game, char *lineOne);
 
 // Free when parsing 
 void    freeing(char    **game);
+
+// Drawing
+void	init_struct_frame(t_frame *frame);
+void    get_width_height(t_frame *my_frame, t_soLong *game);
+void    get_background(t_frame *my_frame, t_soLong *game);
+void    get_mlx_win(t_frame *frame, t_soLong *game);
+void    my_mlx_put_pixel(t_img_data *img, int x, int y, int color);
+void    get_image(t_frame *frame);
+void    square (t_img_data *img);
+void    init_struct_imgData(t_img_data *img);
 
 // External functions
 int	        ft_strrchr(const char *s, int c);

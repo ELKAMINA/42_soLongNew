@@ -11,6 +11,8 @@ SRC =  main.c\
 		./checks/check_scene.c \
 		./checks/check_scene2.c \
 		./freeing/to_free.c \
+		./game/retrieve_bgd.c \
+		./game/retrieve_bgd2.c \
 		./gnl/get_next_line.c \
 		./gnl/get_next_line_utils.c \
 
@@ -19,13 +21,13 @@ OBJ = $(SRC:.c=.o)
 all : $(NAME)
 
 %.o : %.c
-	# $(CC) -Imlx -c $< -o $@
-	$(CC) -c $< -o $@
+	$(CC) -I/usr/include -Iminilibx -c $< -o $@
+	# $(CC) -c $< -o $@
 
 $(NAME) : $(OBJ)
-	# make -C mlx
-	# $(CC) $(OBJ) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
-	$(CC) -o $(NAME) $(OBJ)
+	make -C minilibx
+	$(CC) $(OBJ) -lm -lz -o $(NAME) minilibx/libmlx_Linux.a -lXext -lX11
+	# $(CC) -o $(NAME) $(OBJ)
 
 clean :
 	rm -rf $(OBJ)
