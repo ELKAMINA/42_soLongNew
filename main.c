@@ -28,16 +28,16 @@ int	main(int argc, char *argv[])
 {
 	int 		fd;
 	t_soLong 	game;
-	t_frame 	frame;
+	//t_frame 	frame;
 
 	fd = check_create(argc, argv);
 	if (fd == 0)
 		return (0);
 	init_struct_game(&game, fd);
 	verif_scene(&game);
-	init_struct_frame(&frame);
-	get_background(&frame, &game);
-	get_width_height(&frame, &game);
+	init_struct_frame(game.frame);
+	get_background(game.frame, &game);
+	get_width_height(game.frame, &game);
 	freeing(game.scene);
 	//FREE FRAME AND IMAGE !!!!!!;
 }

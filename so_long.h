@@ -13,12 +13,15 @@
 
 typedef struct s_soLong
 {
-    char    **scene;
-    int    p;
-    int    w;
-    int    v;
-    int    e;
-    int    c;
+	char	**scene;
+	int		p;
+	int		w;
+	int		v;
+	int		e;
+	int		c;
+	struct s_frame		*frame;
+	struct s_img_data	*img;
+    
 }   t_soLong;
 
 typedef struct s_frame
@@ -39,6 +42,7 @@ typedef struct s_img_data
 	int	  img_width;
 	int	  img_height;
     char  *addr;
+
 }   t_img_data;
 
 // Check params and get map
@@ -69,7 +73,7 @@ void    get_background(t_frame *my_frame, t_soLong *game);
 void    get_mlx_win(t_frame *frame, t_soLong *game);
 void    my_mlx_put_pixel(t_img_data *img, int x, int y, int color);
 void    get_image(t_frame *frame, t_soLong *game);
-void    square (t_img_data *img);
+void    square (t_img_data *img, t_soLong *game);
 void    init_struct_imgData(t_img_data *img);
 void    get_colored_square(t_frame *frame, t_soLong *game);
 
