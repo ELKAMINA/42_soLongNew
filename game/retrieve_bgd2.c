@@ -45,7 +45,8 @@ void    get_colored_square(t_frame *frame, t_soLong *game)
             img.img = mlx_new_image(frame->mlx, 64, 64);
             img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
             //my_mlx_put_pixel(&img, 5, 5, 0x00FF0000);
-            square(&img);
+            // square(&img);
+            img.img = mlx_xpm_file_to_image(frame->mlx, img.rpath, img.img_width, img.img_height);
             mlx_put_image_to_window(frame->mlx, frame->win, img.img, (i + img.img_width) , (j + img.img_height));
             mlx_loop(frame->mlx);
             j++;

@@ -41,7 +41,7 @@ void init_struct_imgData(t_img_data *img)
     img->bits_per_pixel = 0;
 	img->line_length = 0;
 	img->endian = 0;
-    img->rpath = NULL;
+    img->rpath = "../images/wall.xpm";
 	img->img_width = 0;;
 	img->img_height = 0;
     img->addr = NULL;
